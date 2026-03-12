@@ -1,0 +1,44 @@
+# Data Dictionary - Brazilian E-Commerce
+
+## Orders Table
+- **order_id**: Unique order identifier
+- **customer_id**: Links to customer
+- **order_status**: delivered, shipped, canceled, etc.
+- **order_purchase_timestamp**: When customer clicked "buy"
+- **order_delivered_customer_date**: When it actually arrived
+- **order_estimated_delivery_date**: When we promised it would arrive
+
+## Order Items Table  
+- **order_id**: Which order this item belongs to
+- **product_id**: What was ordered
+- **seller_id**: Who sold it
+- **price**: Item price (R$)
+- **freight_value**: Shipping cost (R$)
+
+## Products Table
+- **product_id**: Unique product identifier
+- **product_category_name**: Category (in Portuguese)
+- **product_weight_g**: Weight in grams
+- Other columns: dimensions, photos, description length
+
+## Customers Table
+- **customer_id**: Unique customer identifier
+- **customer_city**: City name
+- **customer_state**: Brazilian state code (SP, RJ, etc.)
+
+## Sellers Table
+- **seller_id**: Unique seller identifier  
+- **seller_city**: Where seller is located
+- **seller_state**: Brazilian state code
+
+## Payments Table
+- **order_id**: Which order
+- **payment_type**: credit_card, boleto, voucher, debit_card
+- **payment_installments**: How many monthly payments
+- **payment_value**: Amount (R$)
+
+## Reviews Table
+- **review_id**: Unique review identifier
+- **order_id**: Which order was reviewed
+- **review_score**: 1-5 stars
+- **review_comment_message**: Text feedback (optional)

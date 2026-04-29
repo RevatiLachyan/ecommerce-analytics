@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: raw_ecommerce
+    description: Raw Brazilian E-Commerce data from Kaggle
+    database: ECOMMERCE_ANALYTICS
+    schema: RAW
+    tables:
+      - name: customers
+        description: Customer information
+        
+      - name: orders
+        description: Order transactions - main fact table
+        
+      - name: order_items
+        description: Line items for each order
+        
+      - name: products
+        description: Product catalog
+        
+      - name: sellers
+        description: Seller information
+        
+      - name: payments
+        description: Payment details for orders
+        
+      - name: reviews
+        description: Customer reviews and ratings

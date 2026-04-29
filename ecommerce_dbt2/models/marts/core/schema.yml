@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: Order fact table with metrics
+    columns:
+      - name: order_id
+        description: Unique order identifier
+        tests:
+          - unique
+          - not_null
+      
+      - name: customer_id
+        description: Foreign key to dim_customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+      
+      - name: order_value
+        description: Total order value
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      
+      - name: item_count
+        description: Number of items in order
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+              config:
+                where: "is_delivered = true"
+  
+  - name: dim_customers
+    description: Customer dimension
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - unique
+          - not_null
+      
+      - name: state
+        description: Brazilian state
+        tests:
+          - not_null
+  
+  - name: dim_products
+    description: Product dimension
+    columns:
+      - name: product_id
+        description: Unique product identifier
+        tests:
+          - unique
+          - not_null
+      
+      - name: category
+        description: Product category
+        tests:
+          - not_null
+  
+  - name: dim_sellers
+    description: Seller dimension
+    columns:
+      - name: seller_id
+        description: Unique seller identifier
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,31 @@
+name: 'ecommerce_dbt'
+version: '1.0.0'
+config-version: 2
+
+# This is how dbt knows what to build
+profile: 'ecommerce_dbt'
+
+# Folders
+model-paths: ["models"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+# Where to put compiled SQL
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Model configuration
+models:
+  ecommerce_dbt:
+    # Staging models - just clean up raw data
+    staging:
+      +materialized: view
+      +schema: staging
+    
+    # Marts - our final analytics tables
+    marts:
+      +materialized: table
+      +schema: analytics
